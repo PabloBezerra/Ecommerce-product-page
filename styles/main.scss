@@ -1,3 +1,4 @@
+@charset 'UTF-8';
 
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
 $font:'Kumbh Sans', sans-serif;
@@ -11,3 +12,109 @@ $Grayish-blue: hwb(220 71% 22%);
 $Light-grayish-blue: hsl(223, 64%, 98%);
 $White: hsl(0, 0%, 100%);
 $Black: hsl(0, 0%, 0%);
+
+// RESET
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $font;
+    transition: all ease-in-out .8s;
+}
+
+body{
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    
+    svg.icon-menu{
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    nav.menu-bar{
+        position: absolute;
+        width: 60vw;
+        height: 100vh;
+        background-color: $White;
+        border: 1px solid $Black;
+        padding: 20px;
+        top: 0px;
+        left: -60vw;
+
+        svg.close{
+            margin-left: 15px;
+            cursor: pointer;
+        }
+
+        ul{
+            width: 100%;
+            height: 25%;
+            margin: 40px 0px 0px 15px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            li a{
+                text-decoration: none;
+                color: $Very-dark-blue;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    svg.cart{
+        cursor: pointer;
+    }
+
+    section.cartArea{
+        position: absolute;
+        width: 350px;
+        height: 400px;
+        padding: 10px;
+        top: - 470px;
+        left: calc(100vw - 360px);
+        border-radius: 10px;
+        border: 1px solid $Black;
+        background-color: $White;
+
+        h3{
+            padding: 15px 0px 15px 10px;
+            border-bottom: 1px solid $Dark-grayish-blue;
+        }
+
+        div.cartInfo{
+            padding: 30px 0;
+            text-align: center;
+            align-content: center;
+        }
+
+        &.active{
+            top: 70px;
+        }
+    }
+
+    svg.logo{
+        height: 20px;
+        flex-basis: 60%;
+    }
+
+    img.avatar{
+        width: 40px;
+    }
+}
