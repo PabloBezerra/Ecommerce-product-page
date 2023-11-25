@@ -24,11 +24,10 @@ $Black: hsl(0, 0%, 0%);
 }
 
 body{
-    max-width: 100vw;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 header{
@@ -39,6 +38,8 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    position: fixed;
+    background-color: $White;
     
     svg.icon-menu{
         font-size: 30px;
@@ -54,6 +55,7 @@ header{
         padding: 20px;
         top: 0px;
         left: -60vw;
+        z-index: 900;
 
         svg.close{
             margin-left: 15px;
@@ -92,6 +94,7 @@ header{
         border-radius: 10px;
         border: 1px solid $Black;
         background-color: $White;
+        z-index: 999;
 
         h3{
             padding: 15px 0px 15px 10px;
@@ -116,5 +119,53 @@ header{
 
     img.avatar{
         width: 40px;
+    }
+}
+
+main{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    overflow: hidden;
+
+    section.carousel{
+        width: 100%;
+        height: 400px;
+
+        div.showCase{
+            width: 100vw;
+            height: 100%;
+            position: relative;
+            z-index: 0;
+
+            div.screenImage{
+                display: flex;
+                flex-direction: row;
+
+                img{
+                    width: 400px;
+                }
+
+            }
+
+            div.pass{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                top: 0px;
+                z-index: 10;
+
+                svg::before{
+
+                    background-color: $White;
+                }
+            }
+        }
     }
 }
