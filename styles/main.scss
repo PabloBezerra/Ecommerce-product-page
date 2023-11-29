@@ -42,17 +42,27 @@ header{
     background-color: $White;
     z-index: 900;
     
-    svg.icon-menu{
+    div.curtain{
+        position: absolute;
+        top: 0px;
+        width: 100vw;
+        height: 100vh;
+        background-color: $Black;
+        opacity: 50%;
+        display: none;
+    }
+
+    svg.iconMenu{
         font-size: 30px;
         cursor: pointer;
     }
 
-    nav.menu-bar{
+    nav.menuBar{
         position: absolute;
         width: 60vw;
         height: 100vh;
         background-color: $White;
-        border: 1px solid $Black;
+        box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.555);
         padding: 20px;
         top: 0px;
         left: -60vw;
@@ -80,33 +90,53 @@ header{
         }
     }
 
-    svg.cart{
+    div.cart{
         cursor: pointer;
+        position: relative;
+
+        div.cont{
+            display: none;
+            height: 15px;
+            width: 20px;
+            position: absolute;
+            background-color: $Orange;
+            border-radius: 10px;
+            color: $White;
+            text-align: center;
+            font-size: .7em;
+            font-weight: bold;
+            left: 10px;
+        }
+        &.content{div.cont{display: block;}}
     }
 
     section.cartArea{
         position: absolute;
         width: 350px;
-        height: 400px;
+        height: auto;
+        max-height: 400px;
         padding: 10px;
         top: - 470px;
         left: calc(100vw - 360px);
         border-radius: 10px;
-        border: 1px solid $Black;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.432);
         background-color: $White;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
 
         h3{
             padding: 15px 0px 15px 10px;
-            border-bottom: 1px solid $Dark-grayish-blue;
         }
-
+        
         div.cartInfo{
-            padding: 30px 0;
+            border-top: 1px solid $Grayish-blue;
+            padding: 10px 0;
             text-align: center;
             align-content: center;
 
             div.product{
-                height: 100;
+                height: 75px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -132,15 +162,29 @@ header{
                         text-align: left;
                         span{font-weight: bold;}
                     }
-                }
-
+                } 
                 
+                svg{
+                    width: 30px;
+                    cursor: pointer;
+                }
             }
         }
 
-        &.active{
-            top: 70px;
+        button.checkout{
+            height: 40px;
+            width: 90%;
+            align-self: center;
+            background-color: $Orange;
+            color: $White;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            display: none;
         }
+
+        &.active{top: 70px;}
     }
 
     svg.logo{
@@ -148,9 +192,7 @@ header{
         flex-basis: 60%;
     }
 
-    img.avatar{
-        width: 40px;
-    }
+    img.avatar{width: 40px;}
 }
 
 main{
@@ -174,9 +216,7 @@ main{
                 flex-direction: row;
                 position: absolute;
 
-                img{
-                    width: 400px;
-                }
+                img{width: 400px;}
 
             }
 
@@ -218,13 +258,9 @@ main{
             font-size: 1.2em;
         }
 
-        h1{
-            font-size: 2em;
-        }
+        h1{font-size: 2em;}
 
-        P{
-            color: $Dark-grayish-blue
-        }
+        P{color: $Dark-grayish-blue}
     }
 
     section.purchase{
@@ -241,7 +277,7 @@ main{
             justify-content: space-between;
             align-items: flex-end;
 
-            p.current-price{
+            p.currentPrice{
                 font-weight: bold;
                 font-size: 1.5em;
             }
@@ -253,7 +289,7 @@ main{
                 padding: 5px;
             }
 
-            p.original-price{
+            p.oldPrice{
                 flex-basis: 40%;
                 text-align: end;
                 text-decoration: line-through;
@@ -302,10 +338,13 @@ main{
                 font-size: 1.1em;
                 font-weight: bold;
 
-                &:disabled{
-                    opacity: 50%;
-                }
+                &:disabled{opacity: 50%;}
             }
         }
     }
+}
+
+footer{
+    text-align: center;
+    font-size: .8em;
 }
