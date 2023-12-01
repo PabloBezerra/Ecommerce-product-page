@@ -1,0 +1,80 @@
+@media screen and (min-width:1000px) {
+    header{
+        height: 100px;
+        max-width: 1200px;
+        border-bottom: 1px solid $Grayish-blue;
+        padding: 0;
+        justify-content: space-around;
+
+        svg.iconMenu{
+            display: none;
+        }
+
+        nav.menuBar{
+            position: relative;
+            width: auto;
+            height: 100%;
+            left: 0;
+            order: 2;
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0;
+            flex-basis: 60%;
+
+            svg.close{
+                display: none;
+            }
+
+            ul{
+                width: 100%;
+                height: 100%;
+                justify-self: flex-start;
+                background-color: transparent;
+                flex-direction: row;
+                justify-content: flex-start;
+                margin: 0;
+
+                li{
+                    width: auto;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    margin: 0px 10px;
+                    transition: none;
+                    a{
+                        color: $Dark-grayish-blue;
+                        font-weight: normal;
+                    }
+
+                    &:hover{
+                        border-bottom: 4px solid $Orange;
+                        a{color: $Black;}
+                    }
+                }
+            }
+
+        }
+
+        svg.logo{
+            flex-basis: auto;
+            order: 1;
+        }
+
+        div.cart{
+            order: 3;
+        }
+
+        section.cartArea{
+            left: 650px;
+        }
+
+        img.avatar{
+            border-radius: 50%;
+            order: 4;
+
+            &:hover{
+                border: 2px solid $Orange;
+            }
+        }
+    }
+}

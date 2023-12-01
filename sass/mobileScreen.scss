@@ -1,17 +1,3 @@
-@charset 'UTF-8';
-
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
-$font:'Kumbh Sans', sans-serif;
-
-$Orange: hsl(26, 100%, 55%);
-$Pale-orange: hsl(25, 100%, 94%);
-
-$Very-dark-blue: hsl(220, 13%, 13%);
-$Dark-grayish-blue: hsl(219, 9%, 45%);
-$Grayish-blue: hwb(220 71% 22%);
-$Light-grayish-blue: hsl(223, 64%, 98%);
-$White: hsl(0, 0%, 100%);
-$Black: hsl(0, 0%, 0%);
 
 // RESET
 
@@ -23,11 +9,17 @@ $Black: hsl(0, 0%, 0%);
     transition: all ease-in-out .5s;
 }
 
+html{
+    ::-webkit-scrollbar{display: none;}
+    ::-webkit-scrollbar-thumb{display: none;}
+}
+
 body{
     width: 100vw;
     height: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 header{
@@ -196,7 +188,9 @@ header{
 }
 
 main{
+    height: auto;
     width: 100%;
+    max-width: 400px;
     margin-top: 60px;
     display: flex;
     flex-direction: column;
@@ -207,11 +201,12 @@ main{
         height: 400px;
 
         div.showCase{
-            width: 100vw;
+            width: 100%;
             height: 100%;
             position: relative;
 
             div.screenImage{
+                width: 100%;
                 display: flex;
                 flex-direction: row;
                 position: absolute;

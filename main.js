@@ -64,6 +64,7 @@
         saveCart()
         amount.value = 0
         amountProduct('minus')
+        actionHeader('cart')
     })
 
     const products = cartInfo.getElementsByClassName('product')
@@ -74,7 +75,6 @@
                 element = element.parentElement
             }
             const item = [...products].indexOf(element)
-            console.log(item)
             listCart.splice(item ,1)
             saveCart()
         }
@@ -201,6 +201,5 @@
         saveCart()
     }
     getCart()
-
 
 })()
