@@ -5,13 +5,13 @@
     const header = document.querySelector('header')
     const carousel = document.querySelector('.carousel')
     const information = document.querySelector('.information')
-    const purchase = document.querySelector('.purchase')
     const form = document.querySelector('.amount')
     const cartInfo = document.querySelector('.cartInfo')
     const curtain = document.querySelector('.curtain')
     const cartArea = document.querySelector('.cartArea')
     let listCart = []
     let numberImage = 0
+    let widthImage = 400
 
     // Simulating de product
 
@@ -27,21 +27,29 @@
     //Create Product Page
 
     const screenImage = carousel.querySelector('.screenImage')
-    currentProduct.images.forEach((element, index)=>{
-        const img = document.createElement('img')
-        img.src = `${element}`
-        img.alt = `image product n°${index + 1}`
-        screenImage.appendChild(img)
-    })
+    contuctImage(currentProduct.images, screenImage)
+    const screenMiniatures = carousel.querySelector('.miniatures')
+    contuctImage(currentProduct.miniatures, screenMiniatures, true)
+ 
+    function contuctImage (images, area, marker=false){
+        images.forEach((element, index)=>{
+            const img = document.createElement('img')
+            img.src = `${element}`
+            img.alt = `image product n°${index + 1}`
+            if(marker){
+                img.setAttribute('marker',`${index}`)
+            }
+            area.appendChild(img)
+        })
+    }
 
     information.querySelector('.brand').innerHTML = `${currentProduct.brand}`
     information.querySelector('.titleProduct').innerHTML = `${currentProduct.title}`
     information.querySelector('.description').innerHTML = `${currentProduct.description}`
-
-    purchase.querySelector('.currentPrice').innerHTML = `${currentProduct.prices.current.toLocaleString('en',{style:'currency', currency:'USD'})}`
+    information.querySelector('.currentPrice').innerHTML = `${currentProduct.prices.current.toLocaleString('en',{style:'currency', currency:'USD'})}`
     const discounts = 100 - ((currentProduct.prices.current * 100)/currentProduct.prices.old)
-    purchase.querySelector('.discounts').innerHTML = `${parseInt(discounts)}%`
-    purchase.querySelector('.oldPrice').innerHTML = `${currentProduct.prices.old.toLocaleString('en',{style:'currency', currency:'USD'})}`
+    information.querySelector('.discounts').innerHTML = `${parseInt(discounts)}%`
+    information.querySelector('.oldPrice').innerHTML = `${currentProduct.prices.old.toLocaleString('en',{style:'currency', currency:'USD'})}`
 
     // Adding event listenes to the main elements
 
@@ -50,6 +58,10 @@
     })
 
     carousel.addEventListener('click', (event)=>{ // carousel of images events
+        if(innerWidth >= 1000 && event.target.parentElement.classList.contains('screenImage')){
+            showImageFullScreen()
+            return
+        }
         passImage(event.target.getAttribute('marker'))
     })
 
@@ -80,9 +92,17 @@
         }
     })
 
-    curtain.addEventListener('click',()=>{
+    curtain.addEventListener('click',()=>{ // event click to close the courtain
+        closeImageFullScreen()
         actionHeader('close')
         actionHeader('cartClose')
+    })
+    document.addEventListener('keydown',(event)=>{ // event press esc to close the courtain
+        if(event.key === 'Escape'){
+            closeImageFullScreen()
+            actionHeader('close')
+            actionHeader('cartClose')
+        }
     })
 
     // Funtions
@@ -115,21 +135,25 @@
     }
 
     function passImage(event){ // funtion of passin images from the caroucel
-        const numberMax = 400 * (currentProduct.images.length -1)
+        const numberMax = widthImage * (currentProduct.images.length -1)
         if(event === 'next'){
             if(numberImage === - numberMax){
                 numberImage = 0
             }else{
-                numberImage -= 400
+                numberImage -= widthImage
             }
         }else if(event === 'previous'){
             if(numberImage === 0){
                 numberImage = - numberMax
             }else{
-                numberImage += 400
+                numberImage += widthImage
             }
-        }else{return}
-        const image = carousel.querySelector('.screenImage')
+        }else{
+            if(event !== null){
+                numberImage = -(+event*widthImage)
+            }
+        }
+        const image = document.querySelector('.screenImage')
         image.style.transform = `translateX(${numberImage}px)`
     }
 
@@ -184,6 +208,25 @@
         cart.classList.add('content')
         cart.firstElementChild.innerHTML = `${listCart.length}`
         cartArea.lastElementChild.style.display = 'block'
+    }
+
+    function showImageFullScreen(){ // improve the visualization of the product image in full screen
+        widthImage = 500
+        const body = document.body
+        carousel.classList.add('top')
+        body.insertBefore(carousel, body.firstElementChild)
+        curtain.style.display = 'block'
+        curtain.style.opacity = '80%'
+        passImage(0)
+    }
+
+    function closeImageFullScreen(){ // close the visualization the image product full screen
+        widthImage = 400
+        const main = document.querySelector('main')
+        carousel.classList.remove('top')
+        main.insertBefore(carousel, main.firstElementChild)
+        passImage(0)
+        curtain.style.display = 'none'
     }
 
     // Storage
